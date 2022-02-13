@@ -148,7 +148,6 @@
         <EmbeddedResource Include="src\FNewPassword.resx">
           <DependentUpon>FNewPassword.cs</DependentUpon>
         </EmbeddedResource>
-        <None Include="packages.config" />
         <None Include="Properties\Settings.settings">
             <Generator>SettingsSingleFileGenerator</Generator>
             <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -158,9 +157,12 @@
             <DependentUpon>Settings.settings</DependentUpon>
             <DesignTimeSharedInput>True</DesignTimeSharedInput>
         </Compile>
+        <None Include="src\App.config" />
+        <None Include="src\packages.config" />
     </ItemGroup>
     <ItemGroup>
-        <None Include="App.config" />
+      <Content Include="src\logo.ico" />
+      <Content Include="src\logo.png" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Import Project="packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />
