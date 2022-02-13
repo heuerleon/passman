@@ -71,11 +71,11 @@ namespace PassMan
 
         public void AddPassword(PasswordEntry password)
         {
-            const string query = "insert into passwords (owner_id, website, username, password)" +
-                                 "values (@owner_id, @website, @username, @password)";
+            const string query = "insert into passwords (id, owner_id, website, username, password)" +
+                                 "values (DEFAULT, @owner_id, @website, @username, @password)";
             var args = new Dictionary<string, object>
             {
-                {"@owner_id", 1},
+                {"@owner_id", password.OwnerId},
                 {"@website", password.Website},
                 {"@username", password.Username},
                 {"@password", password.Password},
@@ -122,7 +122,7 @@ namespace PassMan
             while (reader.Read())
             {
                 results.Add(new PasswordEntry(
-                        reader.GetInt64(0),
+                        reader.GetInt64(1),
                         reader.GetString(2),
                         reader.GetString(3),
                         reader.GetString(4)
