@@ -25,17 +25,20 @@ public class PasswordGenerator
         }
         if (ambiguous)
         {
-            pool += "{}[]()/\\\'\"´`~,;.:<>";
+            pool += "{}[]()/\\\'\"´`~,;.:<>§*+";
         }
 
         var random = new Random();
         var output = "";
+        if (pool.Length == 0)
+        {
+            return output;
+        }
 
         for (var i = 0; i < length; i++)
         {
             output += pool[random.Next(pool.Length)];
         }
-
         return output;
     }
 }

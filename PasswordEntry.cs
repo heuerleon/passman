@@ -10,6 +10,15 @@ public class PasswordEntry
     public string Username { get; set; }
     private string _password;
 
+    public PasswordEntry(long id, long ownerId, string website, string username, string password)
+    {
+        Id = id;
+        OwnerId = ownerId;
+        Website = website;
+        Username = username;
+        _password = password;
+    }
+
     public PasswordEntry(long ownerId, string website, string username, string password)
     {
         OwnerId = ownerId;

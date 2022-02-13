@@ -16,14 +16,14 @@ namespace PassMan
         private void BLogin_Click(object sender, EventArgs e)
         {
             Hide();
-            var main = new FMain(_dataBaseManager);
+            var main = new FMain(_dataBaseManager, this);
             main.Show();
             main.Focus();
-            main.FormClosed += (_, _) =>
-            {
-                Show();
-                Focus();
-            };
+        }
+
+        private void BQuit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

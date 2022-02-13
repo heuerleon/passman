@@ -36,7 +36,7 @@ namespace PassMan
 
             try
             {
-                cmd.ExecuteNonQueryAsync();
+                cmd.ExecuteNonQuery();
             } catch (Exception ex)
             {
                 Console.Error.WriteLine(ex.StackTrace);
@@ -51,27 +51,18 @@ namespace PassMan
             }
 
             using var cmd = new NpgsqlCommand(query, _connection);
-            if (args != null)
+            if (args == null) return cmd.ExecuteReader();
+            
+            foreach (var pair in args)
             {
-                foreach (var pair in args)
-                {
-                    cmd.Parameters.AddWithValue(pair.Key, pair.Value);
-                }
+                cmd.Parameters.AddWithValue(pair.Key, pair.Value);
             }
-
-            try
-            {
-                return cmd.ExecuteReader();
-            } catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-            }
-            return null;
+            return cmd.ExecuteReader();
         }
 
         public void AddPassword(PasswordEntry password)
         {
-            const string query = "insert into passwords (id, owner_id, website, username, password)" +
+            const string query = "insert into passwords (id, owner_id, website, username, password) " +
                                  "values (DEFAULT, @owner_id, @website, @username, @password)";
             var args = new Dictionary<string, object>
             {
@@ -85,8 +76,8 @@ namespace PassMan
 
         public void EditPassword(PasswordEntry password)
         {
-            const string query = "update passwords" + 
-                                 "set website = @website, username = @username, password = @password" + 
+            const string query = "update passwords " + 
+                                 "set website = @website, username = @username, password = @password " + 
                                  "where id = @id";
             var args = new Dictionary<string, object>
             {
@@ -100,7 +91,7 @@ namespace PassMan
 
         public void DeletePassword(PasswordEntry password)
         {
-            const string query = "delete from passwords" + 
+            const string query = "delete from passwords " + 
                                  "where id = @id";
             var args = new Dictionary<string, object>
             {
@@ -122,18 +113,20 @@ namespace PassMan
             while (reader.Read())
             {
                 results.Add(new PasswordEntry(
-                        reader.GetInt64(1),
-                        reader.GetString(2),
-                        reader.GetString(3),
-                        reader.GetString(4)
+                    reader.GetInt64(0), 
+                    reader.GetInt64(1), 
+                    reader.GetString(2), 
+                    reader.GetString(3), 
+                    reader.GetString(4)
                     ));
             }
+            reader.Close();
             return results;
         }
 
-        public PasswordEntry? GetPassword(int id)
+        public PasswordEntry? GetPassword(long id)
         {
-            const string query = "select * from passwords" + 
+            const string query = "select * from passwords " + 
                                  "where id = @id";
             var args = new Dictionary<string, object>
             {
@@ -146,12 +139,23 @@ namespace PassMan
                 return null;
             }
 
-            return new PasswordEntry(
-                reader.GetInt64(0),
-                reader.GetString(2),
-                reader.GetString(3),
-                reader.GetString(4)
-            );
+            PasswordEntry? entry;
+            if (reader.Read())
+            {
+                entry = new PasswordEntry(
+                    reader.GetInt64(0),
+                    reader.GetInt64(1),
+                    reader.GetString(2),
+                    reader.GetString(3),
+                    reader.GetString(4)
+                );
+            }
+            else
+            {
+                entry = null;
+            }
+            reader.Close();
+            return entry;
         }
     }
 }
