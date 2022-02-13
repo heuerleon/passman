@@ -6,16 +6,14 @@ namespace PassMan;
 public partial class FMain : Form
 {
     private readonly DataBaseManager _dataBaseManager;
-    private readonly FLogin _login;
+    private FLogin? _login;
     private long _selectedPasswordId = -1;
-    
-    public FMain(DataBaseManager dataBaseManager, FLogin login)
+    public bool ReallyQuit { get; private set; }
+
+    public FMain()
     {
         InitializeComponent();
-        _dataBaseManager = dataBaseManager;
-        _login = login;
-        //UpdatePasswords();
-        //_dataBaseManager.AddPassword(new PasswordEntry(1, "heuer.ovh", "leon", "1234"));
+        _dataBaseManager = new DataBaseManager();
     }
 
     private void UpdatePasswords()
@@ -44,52 +42,7 @@ public partial class FMain : Form
             (int) NUDLength.Value);
     }
 
-    private void BNew_Click(object sender, EventArgs e)
-    {
-        var newPassword = new FNewPassword(_dataBaseManager);
-        if (newPassword.ShowDialog() == DialogResult.OK)
-        {
-            UpdatePasswords();
-        }
-    }
-
-    private void FMain_Load(object sender, EventArgs e)
-    {
-        UpdatePasswords();
-        UpdateGeneratedPassword(sender, e);
-    }
-
-    private void UpdateGeneratedPassword(object sender, EventArgs e)
-    {
-        TBGenerated.Text = GeneratePassword();
-    }
-
-    private void BCopy_Click(object sender, EventArgs e)
-    {
-        Clipboard.SetText(TBGenerated.Text);
-    }
-
-    private void BSave_Click(object sender, EventArgs e)
-    {
-        if (_selectedPasswordId < 0)
-        {
-            return;
-        }
-
-        var entry = _dataBaseManager.GetPassword(_selectedPasswordId);
-        if (entry == null)
-        {
-            return;
-        }
-        
-        entry.Website = TBWebsite.Text;
-        entry.Username = TBUsername.Text;
-        entry.Password = TBPassword.Text;
-        _dataBaseManager.EditPassword(entry);
-        UpdatePasswords();
-    }
-
-    private void DGVPasswords_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    private void UpdateSelectedEntry()
     {
         var rows = DGVPasswords.SelectedRows;
         if (rows.Count == 0 || rows[0].Cells.Count == 0)
@@ -130,16 +83,78 @@ public partial class FMain : Form
         TBPassword.Enabled = false;
     }
 
-    private void TSMILogout_Click(object sender, EventArgs e)
+    private void BNew_Click(object sender, EventArgs e)
     {
-        Close();
-        _login.Show();
-        _login.Focus();
+        var newPassword = new FNewPassword(_dataBaseManager);
+        if (newPassword.ShowDialog() == DialogResult.OK)
+        {
+            UpdatePasswords();
+        }
+    }
+
+    private void FMain_Load(object sender, EventArgs e)
+    {
+        UpdatePasswords();
+        TBGenerated.Text = GeneratePassword();
+        UpdateSelectedEntry();
+    }
+
+    private void UpdateGeneratedPassword(object sender, EventArgs e)
+    {
+        TBGenerated.Text = GeneratePassword();
+    }
+
+    private void BCopy_Click(object sender, EventArgs e)
+    {
+        Clipboard.SetText(TBGenerated.Text);
+    }
+
+    private void BSave_Click(object sender, EventArgs e)
+    {
+        if (_selectedPasswordId < 0)
+        {
+            return;
+        }
+
+        var entry = _dataBaseManager.GetPassword(_selectedPasswordId);
+        if (entry == null)
+        {
+            return;
+        }
+        
+        entry.Website = TBWebsite.Text;
+        entry.Username = TBUsername.Text;
+        entry.Password = TBPassword.Text;
+        _dataBaseManager.EditPassword(entry);
+        UpdatePasswords();
+    }
+
+    private void DGVPasswords_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+        UpdateSelectedEntry();
+    }
+
+    private void TSMILogin_Click(object sender, EventArgs e)
+    {
+        _login = new FLogin(_dataBaseManager);
+        _login.ShowDialog();
     }
 
     private void TSMIQuit_Click(object sender, EventArgs e)
     {
+        ReallyQuit = true;
+        NITray.Visible = false;
         Close();
-        _login.Close();
+    }
+
+    private void TSMIShow_Click(object sender, EventArgs e)
+    {
+        Show();
+        Focus();
+    }
+
+    private void TSMIGenerate_Click(object sender, EventArgs e)
+    {
+        Clipboard.SetText(GeneratePassword());
     }
 }

@@ -31,6 +31,7 @@ partial class FNewPassword
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FNewPassword));
         this.TBPassword = new System.Windows.Forms.TextBox();
         this.LPassword = new System.Windows.Forms.Label();
         this.TBUsername = new System.Windows.Forms.TextBox();
@@ -137,6 +138,7 @@ partial class FNewPassword
         this.Controls.Add(this.TBWebsite);
         this.Controls.Add(this.LWebsite);
         this.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+        this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
         this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
         this.Name = "FNewPassword";
         this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

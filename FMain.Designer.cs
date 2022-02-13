@@ -31,6 +31,8 @@ partial class FMain
     /// </summary>
     private void InitializeComponent()
     {
+        this.components = new System.ComponentModel.Container();
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FMain));
         this.TCMain = new System.Windows.Forms.TabControl();
         this.TPPasswords = new System.Windows.Forms.TabPage();
         this.DGVPasswords = new System.Windows.Forms.DataGridView();
@@ -57,16 +59,23 @@ partial class FMain
         this.CBNumbers = new System.Windows.Forms.CheckBox();
         this.CBLowercase = new System.Windows.Forms.CheckBox();
         this.CBUppercase = new System.Windows.Forms.CheckBox();
-        this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+        this.MSMain = new System.Windows.Forms.MenuStrip();
+        this.TSMIAccount = new System.Windows.Forms.ToolStripMenuItem();
+        this.TSMILogin = new System.Windows.Forms.ToolStripMenuItem();
         this.TSMILogout = new System.Windows.Forms.ToolStripMenuItem();
-        this.TSMIMinimize = new System.Windows.Forms.ToolStripMenuItem();
+        this.NITray = new System.Windows.Forms.NotifyIcon(this.components);
+        this.CMSTray = new System.Windows.Forms.ContextMenuStrip(this.components);
+        this.TSMIGenerate = new System.Windows.Forms.ToolStripMenuItem();
+        this.TSS1 = new System.Windows.Forms.ToolStripSeparator();
+        this.TSMIShow = new System.Windows.Forms.ToolStripMenuItem();
         this.TSMIQuit = new System.Windows.Forms.ToolStripMenuItem();
         this.TCMain.SuspendLayout();
         this.TPPasswords.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize) (this.DGVPasswords)).BeginInit();
         this.TPGenerator.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize) (this.NUDLength)).BeginInit();
-        this.menuStrip1.SuspendLayout();
+        this.MSMain.SuspendLayout();
+        this.CMSTray.SuspendLayout();
         this.SuspendLayout();
         // 
         // TCMain
@@ -367,32 +376,71 @@ partial class FMain
         this.CBUppercase.UseVisualStyleBackColor = true;
         this.CBUppercase.CheckedChanged += new System.EventHandler(this.UpdateGeneratedPassword);
         // 
-        // menuStrip1
+        // MSMain
         // 
-        this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.TSMILogout, this.TSMIMinimize, this.TSMIQuit});
-        this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-        this.menuStrip1.Name = "menuStrip1";
-        this.menuStrip1.Size = new System.Drawing.Size(914, 33);
-        this.menuStrip1.TabIndex = 1;
-        this.menuStrip1.Text = "menuStrip1";
+        this.MSMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.TSMIAccount});
+        this.MSMain.Location = new System.Drawing.Point(0, 0);
+        this.MSMain.Name = "MSMain";
+        this.MSMain.Size = new System.Drawing.Size(914, 33);
+        this.MSMain.TabIndex = 1;
+        this.MSMain.Text = "Menu";
+        // 
+        // TSMIAccount
+        // 
+        this.TSMIAccount.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.TSMILogin, this.TSMILogout});
+        this.TSMIAccount.Name = "TSMIAccount";
+        this.TSMIAccount.Size = new System.Drawing.Size(89, 29);
+        this.TSMIAccount.Text = "Account";
+        // 
+        // TSMILogin
+        // 
+        this.TSMILogin.Name = "TSMILogin";
+        this.TSMILogin.Size = new System.Drawing.Size(152, 30);
+        this.TSMILogin.Text = "Login";
+        this.TSMILogin.Click += new System.EventHandler(this.TSMILogin_Click);
         // 
         // TSMILogout
         // 
         this.TSMILogout.Name = "TSMILogout";
-        this.TSMILogout.Size = new System.Drawing.Size(81, 29);
+        this.TSMILogout.Size = new System.Drawing.Size(152, 30);
         this.TSMILogout.Text = "Logout";
-        this.TSMILogout.Click += new System.EventHandler(this.TSMILogout_Click);
         // 
-        // TSMIMinimize
+        // NITray
         // 
-        this.TSMIMinimize.Name = "TSMIMinimize";
-        this.TSMIMinimize.Size = new System.Drawing.Size(181, 29);
-        this.TSMIMinimize.Text = "Minimize to Taskbar";
+        this.NITray.ContextMenuStrip = this.CMSTray;
+        this.NITray.Icon = ((System.Drawing.Icon) (resources.GetObject("NITray.Icon")));
+        this.NITray.Text = "PassMan";
+        this.NITray.Visible = true;
+        // 
+        // CMSTray
+        // 
+        this.CMSTray.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.TSMIGenerate, this.TSS1, this.TSMIShow, this.TSMIQuit});
+        this.CMSTray.Name = "CMSTray";
+        this.CMSTray.Size = new System.Drawing.Size(277, 122);
+        // 
+        // TSMIGenerate
+        // 
+        this.TSMIGenerate.Name = "TSMIGenerate";
+        this.TSMIGenerate.Size = new System.Drawing.Size(276, 30);
+        this.TSMIGenerate.Text = "Copy random password";
+        this.TSMIGenerate.Click += new System.EventHandler(this.TSMIGenerate_Click);
+        // 
+        // TSS1
+        // 
+        this.TSS1.Name = "TSS1";
+        this.TSS1.Size = new System.Drawing.Size(273, 6);
+        // 
+        // TSMIShow
+        // 
+        this.TSMIShow.Name = "TSMIShow";
+        this.TSMIShow.Size = new System.Drawing.Size(276, 30);
+        this.TSMIShow.Text = "Show app";
+        this.TSMIShow.Click += new System.EventHandler(this.TSMIShow_Click);
         // 
         // TSMIQuit
         // 
         this.TSMIQuit.Name = "TSMIQuit";
-        this.TSMIQuit.Size = new System.Drawing.Size(58, 29);
+        this.TSMIQuit.Size = new System.Drawing.Size(276, 30);
         this.TSMIQuit.Text = "Quit";
         this.TSMIQuit.Click += new System.EventHandler(this.TSMIQuit_Click);
         // 
@@ -402,9 +450,10 @@ partial class FMain
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
         this.ClientSize = new System.Drawing.Size(914, 881);
         this.Controls.Add(this.TCMain);
-        this.Controls.Add(this.menuStrip1);
+        this.Controls.Add(this.MSMain);
         this.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-        this.MainMenuStrip = this.menuStrip1;
+        this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
+        this.MainMenuStrip = this.MSMain;
         this.MaximizeBox = false;
         this.Name = "FMain";
         this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -417,17 +466,29 @@ partial class FMain
         this.TPGenerator.ResumeLayout(false);
         this.TPGenerator.PerformLayout();
         ((System.ComponentModel.ISupportInitialize) (this.NUDLength)).EndInit();
-        this.menuStrip1.ResumeLayout(false);
-        this.menuStrip1.PerformLayout();
+        this.MSMain.ResumeLayout(false);
+        this.MSMain.PerformLayout();
+        this.CMSTray.ResumeLayout(false);
         this.ResumeLayout(false);
         this.PerformLayout();
     }
 
+    private System.Windows.Forms.ToolStripMenuItem TSMIGenerate;
+    private System.Windows.Forms.ToolStripMenuItem TSMIShow;
     private System.Windows.Forms.ToolStripMenuItem TSMIQuit;
 
-    private System.Windows.Forms.MenuStrip menuStrip1;
+    private System.Windows.Forms.ToolStripSeparator TSS1;
+
+    private System.Windows.Forms.ContextMenuStrip CMSTray;
+
+    private System.Windows.Forms.ToolStripMenuItem TSMILogin;
+
+    private System.Windows.Forms.NotifyIcon NITray;
+
     private System.Windows.Forms.ToolStripMenuItem TSMILogout;
-    private System.Windows.Forms.ToolStripMenuItem TSMIMinimize;
+
+    private System.Windows.Forms.MenuStrip MSMain;
+    private System.Windows.Forms.ToolStripMenuItem TSMIAccount;
 
     private System.Windows.Forms.DataGridViewTextBoxColumn CUsername;
 

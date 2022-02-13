@@ -29,12 +29,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FLogin));
             this.LUsername = new System.Windows.Forms.Label();
             this.LPassword = new System.Windows.Forms.Label();
             this.TBUsername = new System.Windows.Forms.TextBox();
             this.TBPassword = new System.Windows.Forms.TextBox();
             this.BLogin = new System.Windows.Forms.Button();
-            this.BQuit = new System.Windows.Forms.Button();
+            this.BCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LUsername
@@ -73,38 +74,39 @@
             // 
             this.BLogin.AutoSize = true;
             this.BLogin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BLogin.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.BLogin.Location = new System.Drawing.Point(367, 213);
             this.BLogin.Name = "BLogin";
             this.BLogin.Size = new System.Drawing.Size(76, 40);
             this.BLogin.TabIndex = 3;
             this.BLogin.Text = "Login";
             this.BLogin.UseVisualStyleBackColor = true;
-            this.BLogin.Click += new System.EventHandler(this.BLogin_Click);
             // 
-            // BQuit
+            // BCancel
             // 
-            this.BQuit.AutoSize = true;
-            this.BQuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BQuit.Location = new System.Drawing.Point(12, 213);
-            this.BQuit.Name = "BQuit";
-            this.BQuit.Size = new System.Drawing.Size(64, 40);
-            this.BQuit.TabIndex = 4;
-            this.BQuit.Text = "Quit";
-            this.BQuit.UseVisualStyleBackColor = true;
-            this.BQuit.Click += new System.EventHandler(this.BQuit_Click);
+            this.BCancel.AutoSize = true;
+            this.BCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.BCancel.Location = new System.Drawing.Point(12, 213);
+            this.BCancel.Name = "BCancel";
+            this.BCancel.Size = new System.Drawing.Size(87, 40);
+            this.BCancel.TabIndex = 4;
+            this.BCancel.Text = "Cancel";
+            this.BCancel.UseVisualStyleBackColor = true;
             // 
             // FLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(455, 265);
-            this.Controls.Add(this.BQuit);
+            this.Controls.Add(this.BCancel);
             this.Controls.Add(this.BLogin);
             this.Controls.Add(this.TBPassword);
             this.Controls.Add(this.TBUsername);
             this.Controls.Add(this.LPassword);
             this.Controls.Add(this.LUsername);
             this.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FLogin";
@@ -114,7 +116,7 @@
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Button BQuit;
+        private System.Windows.Forms.Button BCancel;
 
         private System.Windows.Forms.Label LPassword;
         private System.Windows.Forms.TextBox TBUsername;

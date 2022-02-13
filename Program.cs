@@ -16,7 +16,20 @@ namespace PassMan
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FLogin());
+            var main = new FMain();
+            main.FormClosing += (_, e) =>
+            {
+                if (main.ReallyQuit)
+                {
+                    Application.Exit();
+                }
+                else
+                {
+                    e.Cancel = true;
+                    main.Hide();
+                }
+            };
+            Application.Run(main);
         }
     }
 }

@@ -6,24 +6,11 @@ namespace PassMan
     public partial class FLogin : Form
     {
         private readonly DataBaseManager _dataBaseManager;
-        
-        public FLogin()
+
+        public FLogin(DataBaseManager dataBaseManager)
         {
             InitializeComponent();
-            _dataBaseManager = new DataBaseManager();
-        }
-
-        private void BLogin_Click(object sender, EventArgs e)
-        {
-            Hide();
-            var main = new FMain(_dataBaseManager, this);
-            main.Show();
-            main.Focus();
-        }
-
-        private void BQuit_Click(object sender, EventArgs e)
-        {
-            Close();
+            _dataBaseManager = dataBaseManager;
         }
     }
 }
