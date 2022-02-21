@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PassMan;
+namespace PassMan.Utils;
 
 public class PasswordGenerator
 {

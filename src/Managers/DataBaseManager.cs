@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Npgsql;
+using PassMan.Models;
 
 namespace PassMan
 {

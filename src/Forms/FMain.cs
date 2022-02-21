@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using PassMan.Utils;
 
-namespace PassMan;
+namespace PassMan.Forms;
 
 public partial class FMain : Form
 {

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using PassMan.Models;
 
-namespace PassMan;
+namespace PassMan.Forms;
 
 public partial class FNewPassword : Form
 {

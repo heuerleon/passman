@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace PassMan;
+namespace PassMan.Models;
 
 public class UserAccount
 {

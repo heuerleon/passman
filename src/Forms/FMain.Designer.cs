@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace PassMan;
+namespace PassMan.Forms;
 
 partial class FMain
 {

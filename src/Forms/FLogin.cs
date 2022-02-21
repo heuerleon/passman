@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace PassMan
+namespace PassMan.Forms
 {
     public partial class FLogin : Form
     {

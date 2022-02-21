@@ -1,4 +1,4 @@
-﻿namespace PassMan
+﻿namespace PassMan.Forms
 {
     partial class FLogin
     {
