@@ -6,8 +6,8 @@ public class UserAccount
 {
     public long Id { get; set; }
     public string Username { get; set; }
-    private byte[]? _password;
-    private byte[]? _salt;
+    private byte[] _password;
+    private byte[] _salt;
 
     public UserAccount(long id, string username, byte[] password, byte[] salt)
     {
